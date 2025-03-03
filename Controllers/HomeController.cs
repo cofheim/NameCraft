@@ -16,5 +16,17 @@ namespace NameCraft.Controllers
             ViewBag.Nickname = _generator.Generate();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Generate(int count)
+        {
+            var nicknames = new List<string>();
+            for (int i = 0; i < count; i++)
+            {
+                nicknames.Add(_generator.Generate());
+            }
+            ViewBag.Nicknames = nicknames;
+            return View("Index");
+        }
     }
 }

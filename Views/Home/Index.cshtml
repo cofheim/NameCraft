@@ -2,5 +2,27 @@
     ViewData["Title"] = "Генератор никнеймов";
 }
 
-<h1>@ViewBag.Nickname</h1>
-<a href="@Url.Action("Index")" class="btn btn-primary">Сгенерировать новый</a>
+<div class="container mt-5">
+    <h1 class="mb-4">Генератор никнеймов</h1>
+
+    <form method="post" asp-action="Generate">
+        <div class="mb-3">
+            <label class="form-label">Сколько ников сгенерировать? (1-50)</label>
+            <input type="number" name="count" class="form-control" value="5" min="1" max="50" required>
+        </div>
+        <button type="submit" class="btn btn-success">Создать!</button>
+    </form>
+
+    @if (ViewBag.Nicknames != null)
+    {
+        <div class="mt-4">
+            <h3>Результаты:</h3>
+            <ul class="list-group">
+                @foreach (var nick in ViewBag.Nicknames)
+                {
+                    <li class="list-group-item">@nick</li>
+                }
+            </ul>
+        </div>
+    }
+</div>
