@@ -1,4 +1,15 @@
+using NameCraft.Models;
+using NameCraft.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Загрузка словарей
+var wordBank = new WordBank();
+wordBank.LoadWords(builder.Environment);
+
+// Регистрация сервисов
+builder.Services.AddSingleton(wordBank);
+builder.Services.AddScoped<NicknameGenerator>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
